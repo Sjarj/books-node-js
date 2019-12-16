@@ -9,4 +9,13 @@ describe('Test de validation', () => {
     assert(message === 'Le titre est requis');
     done();
   });
+
+  it(`Un livre doit avoir moins de 3000 pages`, done => {
+    const book1 = new Book({ title: 'les fleurs du mal', totalPages: 3001 });
+    book1.validate(validateionResult => {
+      const { message } = validateionResult.errors.totalPages;
+      assert(message === 'Un livre doit avoir moins de 3000 pages');
+      done();
+    });
+  });
 });
