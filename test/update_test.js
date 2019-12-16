@@ -43,4 +43,13 @@ describe('Test du update', () => {
       done
     );
   });
+  it('Recherche un livre et increment son nombre de page', done => {
+    Book.updateOne({ title: 'Moby Dick' }, { $inc: { totalPages: 3 } }).then(
+      () =>
+        Book.findOne({ title: 'Moby Dick' }).then(book => {
+          assert(book.totalPages === 3);
+          done();
+        })
+    );
+  });
 });
